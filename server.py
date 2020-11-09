@@ -1,4 +1,5 @@
-import threading, socket
+import socket
+from threading import Thread
 
 # local host and port
 host = "127.0.0.1"
@@ -53,7 +54,7 @@ def receive():
         client.send("Connected to the server!".encode("ascii"))
 
         # starting a thread for each user
-        t = threading.Thread(target=handle, args=(client,))
+        t = Thread(target=handle, args=(client,))
         t.start()
 
 if __name__ == "__main__":

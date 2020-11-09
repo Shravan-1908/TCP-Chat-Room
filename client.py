@@ -1,4 +1,5 @@
-import socket, threading
+import socket
+from threading import Thread
 
 nickname = input("Enter a nickname: ")
 
@@ -23,15 +24,15 @@ def recieve():
             break
 
 
-def write():
+def send():
     while True:
         message = f"{nickname}: {input()}"
         client.send(message.encode("ascii"))
 
 # recieving thread
-r_thread = threading.Thread(target=recieve)
+r_thread = Thread(target=recieve)
 r_thread.start()
 
 # sending thread
-s_thread = threading.Thread(target=write)
+s_thread = Thread(target=send)
 s_thread.start()
